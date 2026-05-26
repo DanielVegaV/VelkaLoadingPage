@@ -7,710 +7,1112 @@
 
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     :root {
-      --verde-oscuro: #1f2a1d;
-      --verde-musgo: #556b2f;
-      --verde-claro: #7d9447;
+      --verde-profundo: #06351f;
+      --verde-oscuro: #0b4b2d;
+      --verde-medio: #0b5b33;
+      --verde-vivo: #19a34a;
+      --verde-badge: #0b7d37;
+      --verde-claro: #d9f5df;
+      --lima: #d7f77b;
       --dorado: #d6c28b;
-      --crema: #fffaf0;
-      --fondo: #f3f1e8;
+      --fondo-crema: #f5f7f2;
+      --tarjeta-crema: #ffffff;
+      --tabla-crema: #eef3e8;
+      --borde-crema: #d7e0cf;
+      --linea-crema: #e2e8dc;
+      --texto: #1f3428;
+      --texto-fuerte: #0f2419;
+      --texto-suave: #526157;
+      --gris: #6b756e;
+      --blanco: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: linear-gradient(180deg, #f3f1e8, #ece7d3);
-      color: #26311f;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5f7f2 0%, #eef3e8 100%);
+      color: var(--texto);
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 14% 22%, rgba(215, 247, 123, 0.12), transparent 26%),
+        radial-gradient(circle at 86% 72%, rgba(214, 194, 139, 0.14), transparent 28%),
+        linear-gradient(135deg, rgba(245, 247, 242, 0.95), rgba(238, 243, 232, 0.95));
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(215, 247, 123, 0.14), transparent 24%),
+        radial-gradient(circle at 86% 72%, rgba(214, 194, 139, 0.16), transparent 26%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .particulas span {
-      position: absolute;
-      width: 18px;
-      height: 18px;
+      position: fixed;
+      width: 16px;
+      height: 16px;
       background: rgba(214, 194, 139, 0.25);
       border-radius: 50%;
-      animation: flotar 10s linear infinite;
+      animation: flotar 11s linear infinite;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .particulas span:nth-child(1){left:10%;animation-delay:0s;top:80%;}
-    .particulas span:nth-child(2){left:20%;animation-delay:2s;top:70%;}
-    .particulas span:nth-child(3){left:30%;animation-delay:4s;top:90%;}
-    .particulas span:nth-child(4){left:45%;animation-delay:1s;top:75%;}
-    .particulas span:nth-child(5){left:60%;animation-delay:3s;top:85%;}
-    .particulas span:nth-child(6){left:70%;animation-delay:5s;top:78%;}
-    .particulas span:nth-child(7){left:80%;animation-delay:1s;top:88%;}
-    .particulas span:nth-child(8){left:90%;animation-delay:4s;top:70%;}
-    .particulas span:nth-child(9){left:50%;animation-delay:6s;top:95%;}
-    .particulas span:nth-child(10){left:15%;animation-delay:7s;top:85%;}
+    .particulas span:nth-child(1){left:8%;animation-delay:0s;top:88%;}
+    .particulas span:nth-child(2){left:18%;animation-delay:2s;top:74%;}
+    .particulas span:nth-child(3){left:31%;animation-delay:4s;top:92%;}
+    .particulas span:nth-child(4){left:45%;animation-delay:1s;top:79%;}
+    .particulas span:nth-child(5){left:60%;animation-delay:3s;top:86%;}
+    .particulas span:nth-child(6){left:72%;animation-delay:5s;top:81%;}
+    .particulas span:nth-child(7){left:84%;animation-delay:1.5s;top:91%;}
+    .particulas span:nth-child(8){left:92%;animation-delay:4s;top:72%;}
+    .particulas span:nth-child(9){left:52%;animation-delay:6s;top:95%;}
+    .particulas span:nth-child(10){left:14%;animation-delay:7s;top:84%;}
 
     @keyframes flotar {
       0% {
-        transform: translateY(0px) scale(1);
+        transform: translateY(0) scale(1);
         opacity: 0;
       }
-
-      50% {
+      42% {
         opacity: 1;
       }
-
       100% {
-        transform: translateY(-900px) scale(1.6);
+        transform: translateY(-900px) scale(1.65);
         opacity: 0;
       }
     }
 
-    header {
-      background:
-        linear-gradient(rgba(31,42,29,0.82), rgba(31,42,29,0.88)),
-        url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1600&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-      position: relative;
-      color: white;
-    }
-
-    nav {
+    .nav-principal {
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 8%;
-      background: rgba(31,42,29,0.72);
-      backdrop-filter: blur(14px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      z-index: 100;
+      background: rgba(6, 53, 31, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
     }
 
-    .logo {
+    .nav-contenido {
+      width: min(1280px, 100%);
+      min-height: 78px;
+      margin: auto;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+    }
+
+    .nav-marca {
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 210px;
     }
 
-    .logo-icon {
-      width: 40px;
-      height: auto;
+    .logo-icono {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
     }
 
-    .logo-img {
-      width: 120px;
-      height: auto;
-      border-radius: 0;
-      box-shadow: none;
+    .logo-nombre {
+      height: 48px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      display: block;
     }
 
     .nav-links {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 36px;
+      width: min(310px, calc(100vw - 44px));
+      background: linear-gradient(180deg, rgba(11, 75, 45, 0.98), rgba(6, 53, 31, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 12px;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 6px;
+      flex-direction: column;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
+    }
+
+    .nav-links.abierto {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
     }
 
     .nav-links a {
+      color: var(--blanco);
       text-decoration: none;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 40px;
-      transition: 0.3s;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
-      background: linear-gradient(135deg, var(--verde-claro), var(--dorado));
-      color: var(--verde-oscuro);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+      background: var(--lima);
+      border-color: rgba(215, 247, 123, 0.36);
+      color: var(--verde-profundo);
+      transform: translateY(-2px);
     }
 
-    .nav-links .search-btn {
-      width: 44px;
-      height: 44px;
-      padding: 0;
+    .nav-acciones {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+
+    .boton-menu {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(214,194,139,0.45);
-      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: var(--verde-claro);
+      color: var(--verde-badge);
+      font-size: 14px;
+      font-weight: 900;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
     }
 
-    .nav-links .search-btn svg {
-      width: 21px;
-      height: 21px;
-      stroke: currentColor;
+    .boton-menu:hover {
+      background: var(--lima);
+      color: var(--verde-profundo);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
     }
 
     .hero {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
+      padding: 122px 8% 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      color: var(--blanco);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(215, 247, 123, 0.14), transparent 28%),
+        radial-gradient(circle at 83% 70%, rgba(214, 194, 139, 0.18), transparent 32%),
+        linear-gradient(135deg, rgba(6, 53, 31, 0.97), rgba(11, 75, 45, 0.92));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(215, 247, 123, 0.14), transparent 28%),
+        radial-gradient(circle at 83% 70%, rgba(214, 194, 139, 0.18), transparent 32%);
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -170px;
+      bottom: -210px;
+      border-radius: 50%;
+      background: rgba(215, 247, 123, 0.11);
+      border: 1px solid rgba(215, 247, 123, 0.18);
+      z-index: 1;
+    }
+
+    .hero-layout {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: center;
+      justify-items: center;
       text-align: center;
-      padding: 0 8%;
       position: relative;
       z-index: 2;
     }
 
-    .hero-content {
-      max-width: 950px;
-      animation: aparecerHero 1.2s ease;
+    .hero-copy {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: aparecer 0.95s ease both;
+    }
+
+    .hero-logo {
+      width: min(650px, 92vw);
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 22px;
+      padding: 24px 36px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.32),
+        0 0 0 8px rgba(215, 247, 123, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+      backdrop-filter: blur(10px);
+    }
+
+    .etiqueta-sistema,
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      background: rgba(215, 247, 123, 0.13);
+      border: 1px solid rgba(215, 247, 123, 0.28);
+      color: var(--lima);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-size: clamp(60px, 10vw, 120px);
-      font-weight: 900;
-      letter-spacing: 8px;
-      margin-bottom: 12px;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 1.04;
+      color: white;
+      margin-bottom: 18px;
+      letter-spacing: -1.5px;
+      text-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     }
 
     .hero h2 {
-      font-size: 34px;
-      color: #f0dfaa;
-      margin-bottom: 25px;
+      color: var(--lima);
+      font-size: clamp(21px, 2.7vw, 30px);
+      line-height: 1.22;
+      margin-bottom: 22px;
     }
 
     .hero p {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 28px;
-      border-radius: 25px;
-      backdrop-filter: blur(8px);
+      max-width: 850px;
+      color: rgba(255, 255, 255, 0.88);
       font-size: 18px;
-      margin-bottom: 35px;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+      line-height: 1.65;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 23px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn-principal,
+    .btn-secundario {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 15px 26px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 16px;
+      transition: 0.25s ease;
     }
 
     .btn-principal {
-      text-decoration: none;
-      background: linear-gradient(135deg, var(--dorado), #f3e3b7);
-      color: var(--verde-oscuro);
-      padding: 16px 34px;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 17px;
-      transition: 0.35s;
-      display: inline-block;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      color: var(--verde-profundo);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
     }
 
-    .btn-principal:hover {
-      transform: translateY(-5px) scale(1.06);
+    .btn-secundario {
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(9px);
+    }
+
+    .btn-principal:hover,
+    .btn-secundario:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .hero-panel {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--texto-fuerte);
+      border-radius: 32px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(14px);
+      animation: aparecer 1.08s ease both;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      right: -80px;
+      top: -90px;
+      border-radius: 50%;
+      background: rgba(215, 247, 123, 0.24);
+    }
+
+    .panel-logo {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(6, 53, 31, 0.08), rgba(214, 194, 139, 0.24));
+      border: 1px solid var(--borde-crema);
+      margin-bottom: 18px;
+    }
+
+    .panel-logo img {
+      width: min(260px, 78%);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 22px rgba(6, 53, 31, 0.18));
+    }
+
+    .hero-stats {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: #f8faf5;
+      border: 1px solid var(--borde-crema);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 128px;
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--verde-badge);
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--texto-suave);
+      font-weight: 700;
+      line-height: 1.35;
+      font-size: 13px;
+    }
+
+    .separador-seccion {
+      height: 46px;
+      background:
+        radial-gradient(circle at center, rgba(214, 194, 139, 0.32), transparent 58%),
+        linear-gradient(90deg, transparent, rgba(11, 75, 45, 0.34), rgba(214, 194, 139, 0.7), rgba(11, 75, 45, 0.34), transparent);
+      background-size: 100% 100%, 100% 2px;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+    }
+
+    .separador-seccion::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background: var(--dorado);
+      border: 3px solid var(--fondo-crema);
+      box-shadow: 0 0 0 1px rgba(11, 75, 45, 0.25), 0 8px 18px rgba(6, 53, 31, 0.12);
     }
 
     section {
-      padding: 90px 8%;
+      padding: 104px 8%;
+      scroll-margin-top: 92px;
       position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(11, 75, 45, 0.11);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.72);
     }
 
     section::before {
       content: "";
       position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(214,194,139,0.08);
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
-      top: 10%;
-      right: -60px;
-      z-index: 0;
+      right: -95px;
+      top: 40px;
+      background: rgba(214, 194, 139, 0.13);
+      pointer-events: none;
+    }
+
+    .seccion-clara {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(245, 247, 242, 0.94));
+    }
+
+    .seccion-crema {
+      background: linear-gradient(135deg, rgba(245, 247, 242, 0.98), rgba(238, 243, 232, 0.94));
+    }
+
+    .seccion-verde {
+      background: linear-gradient(135deg, rgba(6, 53, 31, 0.98), rgba(11, 75, 45, 0.95));
+      color: white;
+    }
+
+    .seccion-verde::before {
+      background: rgba(215, 247, 123, 0.1);
     }
 
     .contenedor {
+      width: min(1200px, 100%);
+      margin: auto;
       position: relative;
       z-index: 2;
-      max-width: 1200px;
-      margin: auto;
     }
 
-    section h2 {
-      font-size: 42px;
+    .encabezado-seccion {
+      max-width: 850px;
+      margin: 0 auto 44px;
       text-align: center;
-      margin-bottom: 45px;
-      color: var(--verde-oscuro);
-      position: relative;
     }
 
-    section h2::after {
-      content: '';
+    .encabezado-seccion h2 {
+      font-size: clamp(32px, 4vw, 46px);
+      color: var(--verde-medio);
+      text-transform: uppercase;
+      letter-spacing: -0.7px;
+      margin-bottom: 14px;
+    }
+
+    .seccion-verde .encabezado-seccion h2 {
+      color: var(--lima);
+    }
+
+    .encabezado-seccion p {
+      color: var(--texto-suave);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .seccion-verde .encabezado-seccion p {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .encabezado-seccion h2::after {
+      content: "";
+      display: block;
       width: 100px;
       height: 5px;
-      background: linear-gradient(90deg, var(--verde-musgo), var(--dorado));
-      display: block;
-      margin: 14px auto 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin: 16px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--verde-medio), var(--lima));
+      box-shadow: 0 6px 14px rgba(11, 75, 45, 0.18);
     }
 
-    h3 {
+    .seccion-verde .encabezado-seccion h2::after {
+      background: linear-gradient(90deg, var(--lima), var(--dorado));
+    }
+
+    .bloque-visual {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 28px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--borde-crema);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
       position: relative;
-      padding-bottom: 12px;
-      margin-bottom: 18px;
+      overflow: hidden;
     }
 
-    h3::after {
-      content: '';
+    .bloque-visual::after {
+      content: "";
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      max-width: 120px;
-      height: 3px;
-      border-radius: 10px;
-      background: linear-gradient(90deg, var(--verde-musgo), transparent);
+      width: 230px;
+      height: 230px;
+      right: -85px;
+      bottom: -95px;
+      border-radius: 50%;
+      background: rgba(215, 247, 123, 0.16);
     }
 
-    .integrante h3::after,
-    .hero h1::after,
-    .hero h2::after {
-      display: none;
+    .bloque-numero {
+      width: 112px;
+      height: 112px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-vivo));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 900;
+      box-shadow: 0 12px 25px rgba(11, 75, 45, 0.25);
+      position: relative;
+      z-index: 2;
+    }
+
+    .bloque-contenido {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bloque-contenido .etiqueta,
+    .propuesta-central .etiqueta,
+    .prototipo-info .etiqueta,
+    .oportunidad-principal .etiqueta,
+    .ingreso-card .etiqueta {
+      color: var(--verde-badge);
+      background: var(--verde-claro);
+      border: 1px solid rgba(11, 125, 55, 0.16);
+      margin-bottom: 12px;
+    }
+
+    .seccion-verde .ingreso-card .etiqueta {
+      color: var(--verde-profundo);
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      border: none;
+    }
+
+    .bloque-contenido h3,
+    .prototipo-info h3,
+    .propuesta-central h3,
+    .diferenciacion h3,
+    .oportunidad-principal h3,
+    .ingreso-card h3,
+    .mini-card h4,
+    .card h3,
+    .integrante h3 {
+      color: var(--texto-fuerte);
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .bloque-contenido p,
+    .card p,
+    .mini-card p,
+    .propuesta-central p,
+    .diferenciacion p,
+    .oportunidad-principal p,
+    .ingreso-card p,
+    .prototipo-info p,
+    .prototipo-lista li {
+      color: var(--texto-suave);
+      line-height: 1.65;
+      font-size: 16px;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
-    .card, .integrante, .resaltado {
-      background: rgba(255,255,255,0.7);
+    .card,
+    .mini-card,
+    .diferenciacion,
+    .prototipo-layout,
+    .ingreso-card,
+    .oportunidad-principal,
+    .integrante,
+    .idea-destacada,
+    .propuesta-central,
+    .punto-valor {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--borde-crema);
+      border-radius: 24px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 26px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     }
 
     .card {
-      padding: 30px;
-      transition: 0.4s;
-      overflow: hidden;
+      padding: 28px;
+      transition: 0.25s ease;
       position: relative;
+      overflow: hidden;
     }
 
     .card::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(85,107,47,0.08), rgba(214,194,139,0.12));
+      background: linear-gradient(135deg, rgba(11, 75, 45, 0.06), rgba(215, 247, 123, 0.14));
       opacity: 0;
-      transition: 0.4s;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 42px rgba(11, 75, 45, 0.14);
     }
 
     .card:hover::before {
       opacity: 1;
     }
 
-    .card:hover {
-      transform: translateY(-12px) rotate(-1deg);
+    .card > * {
+      position: relative;
+      z-index: 2;
     }
 
     .card h3 {
-      color: var(--verde-musgo);
-      margin-bottom: 12px;
-      font-size: 24px;
-    }
-
-    .resaltado {
-      padding: 35px;
-      border-left: 8px solid var(--verde-musgo);
-    }
-
-    .bloque-visual {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 30px;
-      align-items: center;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(12px);
-      border-radius: 32px;
-      padding: 38px;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.13);
-      border: 1px solid rgba(255,255,255,0.45);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bloque-visual::after {
-      content: '';
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      background: rgba(214,194,139,0.14);
-      right: -80px;
-      bottom: -90px;
-    }
-
-    .bloque-numero {
-      width: 120px;
-      height: 120px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, var(--verde-musgo), var(--verde-claro));
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      font-weight: 900;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-      z-index: 2;
-    }
-
-    .bloque-contenido {
-      z-index: 2;
-    }
-
-    .bloque-contenido h3 {
-      font-size: 32px;
-      color: var(--verde-oscuro);
-      margin: 12px 0;
-    }
-
-    .visual-card {
-      text-align: center;
-      min-height: 260px;
+      color: var(--verde-medio);
+      font-size: 23px;
     }
 
     .card-icono {
       width: 70px;
       height: 70px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--verde-musgo), var(--dorado));
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-vivo));
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 34px;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+      margin-bottom: 18px;
+      font-size: 32px;
+      box-shadow: 0 10px 22px rgba(11, 75, 45, 0.2);
     }
 
-    .hero-logo {
-      width: 400px;
-      height: auto;
-      object-fit: contain;
-      margin-bottom: 40px;
+    .idea-layout,
+    .propuesta-layout,
+    .prototipo-layout,
+    .ingresos-layout,
+    .oportunidad-grid {
+      display: grid;
+      gap: 26px;
+      align-items: stretch;
     }
 
     .idea-layout {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 28px;
-      align-items: stretch;
+      grid-template-columns: 0.82fr 1.18fr;
     }
 
     .idea-destacada {
-      background: linear-gradient(135deg, #26311f, #556b2f);
-      color: white;
-      border-radius: 32px;
-      padding: 38px;
-      text-align: center;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.18);
-    }
-
-    .idea-logo {
-      width: 250px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .idea-destacada h3 {
-      font-size: 38px;
-      color: var(--dorado);
-      margin-bottom: 10px;
-    }
-
-    .idea-info {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .propuesta-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .propuesta-central {
-      background: linear-gradient(135deg, #26311f, #556b2f);
-      color: white;
-      padding: 42px;
-      border-radius: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.18);
-    }
-
-    .propuesta-central h3 {
-      font-size: 48px;
-      color: var(--dorado);
-      margin: 12px 0;
-    }
-
-    .propuesta-puntos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .punto-valor {
-      background: rgba(255,255,255,0.76);
-      border-radius: 24px;
-      padding: 24px;
-      font-weight: bold;
-      color: var(--verde-oscuro);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-      border: 2px solid rgba(85,107,47,0.35);
-      outline: 2px solid rgba(214,194,139,0.35);
-      outline-offset: -8px;
-      position: relative;
-      transition: 0.35s;
-    }
-
-    .punto-valor::before {
-      content: '✓';
+      background: linear-gradient(135deg, var(--verde-profundo), var(--verde-oscuro));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 34px;
+      min-height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--verde-musgo), var(--dorado));
-      color: white;
-      font-weight: bold;
-      margin-bottom: 14px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.16);
-    }
-
-    .punto-valor:hover {
-      transform: translateY(-7px);
-      border-color: var(--verde-musgo);
-      outline-color: var(--dorado);
-      box-shadow: 0 18px 35px rgba(47,62,43,0.18);
-    }
-
-    .diferenciacion {
-      margin-top: 28px;
-      background: rgba(255,255,255,0.74);
-      border-radius: 28px;
-      padding: 30px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-      border-top: 6px solid var(--dorado);
-    }
-
-    .diferenciacion h3 {
-      color: var(--verde-musgo);
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
-
-    .ingresos-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
-    }
-
-    .ingreso-card {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-      border-radius: 30px;
-      padding: 36px;
-      border: 1px solid rgba(214,194,139,0.25);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
-    }
-
-    .ingreso-card.grande {
-      background:
-        linear-gradient(rgba(31,42,29,0.75), rgba(31,42,29,0.82)),
-        url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1200&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .ingreso-card h3 {
-      color: var(--dorado);
-      font-size: 28px;
-      margin: 12px 0;
-    }
-
-    .oportunidad-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .oportunidad-principal {
-      background:
-        linear-gradient(rgba(31,42,29,0.82), rgba(31,42,29,0.88)),
-        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      border-radius: 30px;
-      padding: 45px;
-      min-height: 360px;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      box-shadow: 0 18px 35px rgba(0,0,0,0.18);
       position: relative;
       overflow: hidden;
     }
 
-    .oportunidad-principal::after {
-      content: '';
+    .idea-destacada::before {
+      content: "";
       position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(214,194,139,0.18);
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
-      top: -60px;
-      right: -60px;
+      background: rgba(215, 247, 123, 0.13);
+      right: -90px;
+      top: -80px;
     }
 
-    .etiqueta {
-      background: var(--dorado);
-      color: var(--verde-oscuro);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-weight: bold;
-      width: fit-content;
-      margin-bottom: 18px;
+    .idea-logo {
+      width: min(290px, 84%);
+      height: auto;
+      object-fit: contain;
+      position: relative;
       z-index: 2;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.28));
     }
 
-    .oportunidad-principal h3 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #f3e3b7;
-      z-index: 2;
-    }
-
-    .oportunidad-principal p {
-      z-index: 2;
-      font-size: 17px;
-    }
-
+    .idea-info,
     .oportunidad-lateral {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 18px;
     }
 
     .mini-card {
-      background: rgba(255,255,255,0.76);
-      backdrop-filter: blur(12px);
-      border-radius: 26px;
-      padding: 28px;
       display: flex;
       gap: 18px;
       align-items: flex-start;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-      border: 1px solid rgba(255,255,255,0.45);
-      transition: 0.35s;
+      padding: 25px;
+      transition: 0.25s ease;
       flex: 1;
     }
 
     .mini-card:hover {
-      transform: translateX(8px);
-      box-shadow: 0 18px 38px rgba(47,62,43,0.2);
+      transform: translateX(7px);
+      box-shadow: 0 18px 38px rgba(11, 75, 45, 0.13);
     }
 
     .icono {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--verde-musgo), var(--verde-claro));
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-vivo));
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 22px;
-      flex-shrink: 0;
+      font-weight: 900;
+      font-size: 23px;
+      flex: 0 0 48px;
+      box-shadow: 0 8px 18px rgba(11, 75, 45, 0.22);
     }
 
     .mini-card h4 {
-      color: var(--verde-musgo);
+      color: var(--verde-medio);
       font-size: 22px;
-      margin-bottom: 8px;
     }
 
-    .modelo {
-      background: linear-gradient(135deg, #26311f, #556b2f);
+    .oportunidad-grid {
+      grid-template-columns: 1.35fr 0.85fr;
+    }
+
+    .oportunidad-principal {
+      min-height: 370px;
+      padding: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       color: white;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(215, 247, 123, 0.16), transparent 28%),
+        radial-gradient(circle at 20% 82%, rgba(214, 194, 139, 0.18), transparent 32%),
+        linear-gradient(135deg, rgba(6, 53, 31, 0.94), rgba(11, 75, 45, 0.9));
+      overflow: hidden;
+      position: relative;
     }
 
-    .modelo h2 {
-      color: var(--dorado);
+    .oportunidad-principal h3 {
+      color: var(--lima);
+      font-size: 33px;
+      position: relative;
+      z-index: 2;
     }
 
-    .modelo .card {
-      background: rgba(255,255,255,0.08);
+    .oportunidad-principal p {
+      color: rgba(255, 255, 255, 0.84);
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+    }
+
+    .propuesta-layout {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+
+    .propuesta-central {
+      background: linear-gradient(135deg, var(--verde-profundo), var(--verde-oscuro));
       color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .modelo .card h3 {
-      color: var(--dorado);
+    .propuesta-central::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      right: -85px;
+      bottom: -90px;
+      background: rgba(215, 247, 123, 0.12);
     }
 
-    .equipo {
+    .propuesta-central h3 {
+      color: var(--lima);
+      font-size: clamp(38px, 5vw, 58px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .propuesta-central p,
+    .propuesta-central .etiqueta {
+      position: relative;
+      z-index: 2;
+    }
+
+    .propuesta-central p {
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 17px;
+    }
+
+    .propuesta-puntos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .punto-valor {
+      padding: 24px;
+      font-weight: 800;
+      color: var(--texto-fuerte);
+      border: 1px solid var(--borde-crema);
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .punto-valor::before {
+      content: "✓";
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-vivo));
+      color: white;
+      font-weight: 900;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 18px rgba(11, 75, 45, 0.2);
+    }
+
+    .punto-valor:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(11, 75, 45, 0.12);
+    }
+
+    .diferenciacion {
+      margin-top: 24px;
+      padding: 28px;
+      border-left: 8px solid var(--verde-oscuro);
+    }
+
+    .diferenciacion h3 {
+      color: var(--verde-medio);
+      font-size: 26px;
+    }
+
+    .prototipo-layout {
+      grid-template-columns: 1.05fr 0.95fr;
+      padding: 34px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .prototipo-layout::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(215, 247, 123, 0.15);
+      left: -95px;
+      top: -100px;
+    }
+
+    .prototipo-imagen,
+    .prototipo-info {
+      position: relative;
+      z-index: 2;
+    }
+
+    .prototipo-imagen {
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(6, 53, 31, 0.06), rgba(214, 194, 139, 0.22));
+      border: 1px solid var(--borde-crema);
+      padding: 22px;
+    }
+
+    .prototipo-img {
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 22px;
+      filter: drop-shadow(0 18px 28px rgba(6, 53, 31, 0.18));
+    }
+
+    .prototipo-info h3 {
+      color: var(--verde-medio);
+      font-size: 34px;
+    }
+
+    .prototipo-lista {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .prototipo-lista li {
+      background: #f8faf5;
+      border: 1px solid var(--borde-crema);
+      border-left: 5px solid var(--verde-oscuro);
+      border-radius: 15px;
+      padding: 14px 16px;
+      font-weight: 700;
+    }
+
+    .ingresos-layout {
+      grid-template-columns: 1.25fr 0.75fr;
+    }
+
+    .ingreso-card {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 34px;
+    }
+
+    .ingreso-card.grande {
+      background:
+        radial-gradient(circle at 85% 35%, rgba(215, 247, 123, 0.16), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(214, 194, 139, 0.2), transparent 32%),
+        linear-gradient(135deg, rgba(6, 53, 31, 0.86), rgba(11, 75, 45, 0.9));
+    }
+
+    .ingreso-card h3 {
+      color: var(--lima);
+      font-size: 29px;
+    }
+
+    .ingreso-card p {
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .ingreso-card .card-icono {
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      color: var(--verde-profundo);
+    }
+
+    .seccion-verde .bloque-visual {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .seccion-verde .bloque-contenido h3 {
+      color: var(--lima);
+    }
+
+    .seccion-verde .bloque-contenido p {
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .seccion-verde .bloque-numero {
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      color: var(--verde-profundo);
+    }
+
+    .equipo-intro {
       text-align: center;
+      color: var(--texto-suave);
+      margin-top: -28px;
+      margin-bottom: 28px;
+      font-size: 17px;
     }
 
     .carrusel {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 22px;
-      margin-top: 30px;
+      gap: 18px;
+      margin-top: 24px;
     }
 
     .carrusel-contenedor {
       width: 100%;
       max-width: 1050px;
       display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
     .integrante {
       display: none;
-      padding: 30px;
-      transition: 0.4s;
-      animation: fade 0.6s ease;
-    }
-
-    .integrante:hover {
-      transform: translateY(-10px) scale(1.03);
+      padding: 28px;
+      text-align: center;
+      transition: 0.25s ease;
+      animation: fade 0.45s ease;
     }
 
     .integrante.activo {
       display: block;
     }
 
+    .integrante:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 42px rgba(11, 75, 45, 0.13);
+    }
+
     .foto {
-      width: 170px;
-      height: 170px;
-      margin: auto;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 18px;
       border-radius: 50%;
       overflow: hidden;
-      border: 5px solid var(--verde-musgo);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-      margin-bottom: 18px;
+      border: 5px solid var(--verde-oscuro);
+      box-shadow: 0 12px 25px rgba(11, 75, 45, 0.18);
+      background: var(--tabla-crema);
     }
 
     .foto-img {
@@ -720,78 +1122,131 @@
     }
 
     .integrante h3 {
+      color: var(--texto-fuerte);
+      font-size: 21px;
       margin-bottom: 8px;
-      color: var(--verde-oscuro);
     }
 
     .integrante p {
-      color: var(--verde-musgo);
-      font-weight: bold;
+      color: var(--verde-badge);
+      font-weight: 900;
     }
 
     .carrusel-btn {
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       border: none;
-      background: linear-gradient(135deg, var(--verde-musgo), var(--verde-claro));
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-vivo));
       color: white;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
-      transition: 0.35s;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+      transition: 0.25s ease;
+      box-shadow: 0 10px 22px rgba(11, 75, 45, 0.22);
+      flex: 0 0 54px;
     }
 
     .carrusel-btn:hover {
-      transform: scale(1.12) rotate(8deg);
-      background: linear-gradient(135deg, var(--dorado), #f3e3b7);
-      color: var(--verde-oscuro);
+      transform: scale(1.08);
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      color: var(--verde-profundo);
     }
 
     .indicadores {
-      margin-top: 25px;
+      text-align: center;
+      margin-top: 24px;
     }
 
     .punto {
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       display: inline-block;
-      background: #c8b67a;
+      background: #c7d3bc;
       border-radius: 50%;
       margin: 0 5px;
-      transition: 0.3s;
+      transition: 0.25s;
       cursor: pointer;
     }
 
     .punto.activo {
-      transform: scale(1.4);
-      background: var(--verde-musgo);
+      transform: scale(1.35);
+      background: var(--verde-oscuro);
     }
 
     footer {
-      background: linear-gradient(135deg, #1f2a1d, #2f3e2b);
+      background: linear-gradient(135deg, var(--verde-profundo), var(--verde-oscuro));
       color: white;
       text-align: center;
-      padding: 45px 8%;
+      padding: 42px 8%;
       position: relative;
+      z-index: 2;
     }
 
     footer::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, var(--verde-musgo), var(--dorado), var(--verde-musgo));
+      background: linear-gradient(90deg, var(--verde-vivo), var(--lima), var(--verde-vivo));
     }
 
-    @keyframes aparecerHero {
+    .footer-contenido {
+      width: min(1100px, 100%);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .footer-contenido p {
+      color: rgba(255, 255, 255, 0.86);
+      line-height: 1.5;
+    }
+
+    .redes-sociales {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 8px 0 10px;
+    }
+
+    .redes-sociales a {
+      color: var(--verde-profundo);
+      background: linear-gradient(135deg, var(--lima), var(--dorado));
+      border-radius: 999px;
+      padding: 10px 17px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      transition: 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .redes-sociales a:hover {
+      transform: translateY(-2px);
+      background: white;
+      color: var(--verde-oscuro);
+    }
+
+    .redes-sociales svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @keyframes aparecer {
       from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(34px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -801,105 +1256,147 @@
     @keyframes fade {
       from {
         opacity: 0;
-        transform: scale(0.92);
+        transform: scale(0.94);
       }
-
       to {
         opacity: 1;
         transform: scale(1);
       }
     }
 
+    @media (max-width: 1120px) {
+      .nav-contenido {
+        padding: 0 22px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+        padding: 9px 10px;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 900px) {
-      .bloque-visual,
+      .nav-contenido {
+        min-height: 76px;
+      }
+
+      .nav-links {
+        right: 22px;
+        width: min(310px, calc(100vw - 44px));
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .cards,
       .idea-layout,
       .propuesta-layout,
+      .prototipo-layout,
       .ingresos-layout,
       .oportunidad-grid {
         grid-template-columns: 1fr;
       }
 
       .propuesta-puntos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bloque-visual {
         grid-template-columns: 1fr;
       }
 
       .bloque-numero {
-        width: 95px;
-        height: 95px;
-        font-size: 32px;
+        width: 92px;
+        height: 92px;
+        font-size: 30px;
       }
 
-      .carrusel-contenedor {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h2 {
-        font-size: 25px;
-      }
-
-      nav {
-        padding: 12px 5%;
-      }
-
-      .nav-links {
-        justify-content: center;
-        gap: 8px;
-      }
-
-      .nav-links a {
-        padding: 8px 13px;
-        font-size: 14px;
-      }
-
-      .logo-img {
-        width: 100px;
-      }
-
-      .logo-icon {
-        width: 35px;
-      }
-
-      .hero-logo {
-        width: 300px;
-      }
     }
 
     @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .hero h1 {
-        letter-spacing: 3px;
-      }
-
-      section h2 {
-        font-size: 32px;
-      }
-
-      .hero {
-        padding-top: 130px;
+      .carrusel-contenedor {
+        grid-template-columns: 1fr;
+        max-width: 420px;
       }
     }
 
-    @media (max-width: 480px) {
+
+    @media (max-width: 620px) {
+      .nav-contenido {
+        padding: 14px 16px;
+      }
+
+      .nav-marca {
+        min-width: 0;
+      }
+
+      .logo-icono {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-nombre {
+        height: 42px;
+        max-width: 135px;
+      }
+
+
+      .hero {
+        padding: 116px 18px 54px;
+      }
+
       .hero-logo {
-        width: 240px;
+        width: min(430px, 92vw);
+        padding: 18px 20px;
+        border-radius: 26px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
       }
 
       .hero p {
         font-size: 16px;
-        padding: 20px;
+        padding: 18px;
       }
 
-      .bloque-visual {
-        padding: 25px;
+      .hero-botones {
+        flex-direction: column;
+      }
+
+      .btn-principal,
+      .btn-secundario {
+        width: 100%;
+      }
+
+      .bloque-visual,
+      .prototipo-layout,
+      .propuesta-central,
+      .oportunidad-principal,
+      .ingreso-card,
+      .diferenciacion {
+        padding: 24px;
+      }
+
+      .propuesta-puntos {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 76px 18px;
+      }
+
+      .prototipo-imagen {
+        min-height: 240px;
+      }
+
+      .mini-card {
+        flex-direction: column;
       }
 
       .carrusel {
@@ -907,73 +1404,85 @@
       }
 
       .carrusel-btn {
-        width: 45px;
-        height: 45px;
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+      }
+
+      .foto {
+        width: 142px;
+        height: 142px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="particulas" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
 
-  <header id="inicio">
-    <div class="particulas">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-
-    <nav>
-      <div class="logo">
-        <img src="Icono.jpeg" alt="Icono VELKA" class="logo-icon">
-        <img src="NombreLogo.jpeg" alt="Logo VELKA" class="logo-img">
+  <nav class="nav-principal">
+    <div class="nav-contenido">
+      <div class="nav-marca">
+        <img class="logo-icono" src="Icono.jpeg" alt="Ícono VELKA" onerror="this.style.display='none';" />
+        <img class="logo-nombre" src="NombreLogo.jpeg" alt="Nombre VELKA" onerror="this.style.display='none';" />
       </div>
 
-      <div class="nav-links">
+      <div id="navLinks" class="nav-links">
         <a href="#reto">Reto</a>
         <a href="#usuarios">Usuarios</a>
         <a href="#idea">Idea</a>
+        <a href="#oportunidad">Mercado</a>
         <a href="#propuesta">Propuesta</a>
+        <a href="#prototipo">Prototipo</a>
         <a href="#ingresos">Ingresos</a>
         <a href="#social">Responsabilidad</a>
         <a href="#equipo">Equipo</a>
-
-        <a href="#inicio" class="search-btn" aria-label="Buscar">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="11" cy="11" r="7" stroke-width="2"></circle>
-            <path d="M16.5 16.5L21 21" stroke-width="2" stroke-linecap="round"></path>
-          </svg>
-        </a>
       </div>
-    </nav>
 
-    <div class="hero">
-      <div class="hero-content">
-        <img src="NombreLogo.jpeg" alt="Logo VELKA" class="hero-logo">
+      <div class="nav-acciones">
+        <button id="botonMenu" class="boton-menu" type="button" onclick="alternarMenu()" aria-controls="navLinks" aria-expanded="false">☰ Menú</button>
+      </div>
+    </div>
+  </nav>
 
+  <header id="inicio" class="hero">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <img class="hero-logo" src="NombreLogo.jpeg" alt="Logo VELKA" onerror="this.style.display='none';" />
+        <span class="etiqueta-sistema">Sistema ganadero inteligente</span>
+        <h1>Gestión ganadera con tecnología real.</h1>
         <h2>Empresa tecnológica para la gestión ganadera inteligente</h2>
-
         <p>
           VELKA es una empresa tecnológica agropecuaria que desarrolla soluciones digitales para modernizar la gestión ganadera.
           Su producto principal, AgroTag, es una aplicación móvil integrada con aretes electrónicos con chip y código QR,
           diseñada para mejorar el control, la trazabilidad y la administración del ganado en tiempo real.
         </p>
 
-        <a href="#propuesta" class="btn-principal">Conoce la propuesta</a>
+        <div class="hero-botones">
+          <a href="#propuesta" class="btn-principal">Conoce la propuesta</a>
+          <a href="#prototipo" class="btn-secundario">Ver prototipo AgroTag</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <section id="reto" class="seccion-visual">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="reto" class="seccion-clara">
     <div class="contenedor">
-      <h2>Escenario o reto empresarial</h2>
+      <div class="encabezado-seccion">
+        <h2>Escenario o reto empresarial</h2>
+        <p>El problema principal está en la pérdida de información y la baja precisión de los controles manuales.</p>
+      </div>
 
-      <div class="bloque-visual bloque-reto">
+      <div class="bloque-visual">
         <div class="bloque-numero">01</div>
-
         <div class="bloque-contenido">
           <span class="etiqueta">Reto principal</span>
           <h3>Control ganadero manual y poco eficiente</h3>
-
           <p>
             El reto empresarial surge por las dificultades que enfrentan los productores ganaderos al llevar controles manuales
             mediante libretas, conteos visuales y registros poco precisos. Esto genera pérdida de información, errores humanos
@@ -984,12 +1493,17 @@
     </div>
   </section>
 
-  <section id="usuarios" class="seccion-visual">
-    <div class="contenedor">
-      <h2>Usuarios afectados por el reto</h2>
+  <div class="separador-seccion" aria-hidden="true"></div>
 
-      <div class="cards visual-cards">
-        <div class="card visual-card">
+  <section id="usuarios" class="seccion-crema">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <h2>Usuarios afectados por el reto</h2>
+        <p>VELKA está pensada para productores, aliados y organizaciones que necesitan una ganadería más ordenada.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
           <div class="card-icono">🐄</div>
           <h3>Productores ganaderos</h3>
           <p>
@@ -998,7 +1512,7 @@
           </p>
         </div>
 
-        <div class="card visual-card">
+        <div class="card">
           <div class="card-icono">📱</div>
           <h3>Mercado meta</h3>
           <p>
@@ -1007,7 +1521,7 @@
           </p>
         </div>
 
-        <div class="card visual-card">
+        <div class="card">
           <div class="card-icono">🤝</div>
           <h3>Aliados estratégicos</h3>
           <p>
@@ -1019,31 +1533,34 @@
     </div>
   </section>
 
-  <section id="idea" class="seccion-visual idea-section">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="idea" class="seccion-clara">
     <div class="contenedor">
-      <h2>Idea de negocio</h2>
+      <div class="encabezado-seccion">
+        <h2>Idea de negocio</h2>
+        <p>Una solución digital que conecta identificación física, historial digital y ubicación del ganado.</p>
+      </div>
 
       <div class="idea-layout">
         <div class="idea-destacada">
-          <img src="Logo.jpeg" alt="Logo VELKA" class="idea-logo">
+          <img src="Logo.jpeg" alt="Logo VELKA" class="idea-logo" onerror="this.style.display='none';" />
         </div>
 
         <div class="idea-info">
           <div class="mini-card">
             <div class="icono">🌱</div>
-
             <div>
               <h4>Logo</h4>
               <p>
-                Logo basado en tecnología agropecuaria moderna con colores verde musgo
-                y elementos relacionados con ganado y GPS.
+                Logo basado en tecnología agropecuaria moderna con colores verdes
+                y elementos relacionados con ganado, trazabilidad y GPS.
               </p>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="icono">📍</div>
-
             <div>
               <h4>Propuesta</h4>
               <p>
@@ -1058,15 +1575,19 @@
     </div>
   </section>
 
-  <section id="oportunidad" class="oportunidad">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="oportunidad" class="seccion-crema">
     <div class="contenedor">
-      <h2>Oportunidad de mercado</h2>
+      <div class="encabezado-seccion">
+        <h2>Oportunidad de mercado</h2>
+        <p>La digitalización del agro abre espacio para soluciones sencillas, móviles y accesibles.</p>
+      </div>
 
       <div class="oportunidad-grid">
         <div class="oportunidad-principal">
           <span class="etiqueta">Brecha tecnológica</span>
           <h3>Una oportunidad real para digitalizar la ganadería</h3>
-
           <p>
             Existe una clara brecha tecnológica en el sector ganadero, ya que muchos productores continúan utilizando
             registros manuales. La digitalización del agro y el crecimiento del uso de smartphones en zonas rurales
@@ -1077,7 +1598,6 @@
         <div class="oportunidad-lateral">
           <div class="mini-card">
             <div class="icono">!</div>
-
             <div>
               <h4>Problema</h4>
               <p>Pérdida de información, errores humanos y dificultad para rastrear el ganado.</p>
@@ -1086,7 +1606,6 @@
 
           <div class="mini-card">
             <div class="icono">✓</div>
-
             <div>
               <h4>Mercado</h4>
               <p>Productores ganaderos que desean modernizar el control y monitoreo de sus animales.</p>
@@ -1097,15 +1616,19 @@
     </div>
   </section>
 
-  <section id="propuesta" class="seccion-visual propuesta-section">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="propuesta" class="seccion-clara">
     <div class="contenedor">
-      <h2>Solución y propuesta de valor</h2>
+      <div class="encabezado-seccion">
+        <h2>Solución y propuesta de valor</h2>
+        <p>AgroTag integra identificación, ubicación e información ganadera en una sola herramienta.</p>
+      </div>
 
       <div class="propuesta-layout">
         <div class="propuesta-central">
           <span class="etiqueta">Producto principal</span>
           <h3>AgroTag</h3>
-
           <p>
             Una aplicación móvil integrada con aretes inteligentes que permite identificar
             y monitorear cada animal en tiempo real desde el celular.
@@ -1122,7 +1645,6 @@
 
       <div class="diferenciacion">
         <h3>Diferenciación</h3>
-
         <p>
           AgroTag se diferencia por ser un producto accesible, fácil de usar desde el celular
           y enfocado específicamente en las necesidades reales de los productores ganaderos costarricenses.
@@ -1132,15 +1654,53 @@
     </div>
   </section>
 
-  <section id="ingresos" class="modelo seccion-visual">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="prototipo" class="seccion-crema">
     <div class="contenedor">
-      <h2>Modelo de generación de ingresos</h2>
+      <div class="encabezado-seccion">
+        <h2>Prototipo AgroTag</h2>
+        <p>Diseño del arete inteligente que conecta el animal con su ficha digital.</p>
+      </div>
+
+      <div class="prototipo-layout">
+        <div class="prototipo-imagen">
+          <img src="prototipo.jpeg" alt="Prototipo 3D del arete inteligente AgroTag" class="prototipo-img" onerror="this.style.display='none';" />
+        </div>
+
+        <div class="prototipo-info">
+          <span class="etiqueta">Diseño del producto</span>
+          <h3>Arete inteligente para ganado</h3>
+          <p>
+            El prototipo de AgroTag representa el arete electrónico de identificación ganadera
+            desarrollado por VELKA. Integra código QR, chip localizador y numeración visible
+            para facilitar la trazabilidad, el control sanitario y el seguimiento del animal.
+          </p>
+
+          <ul class="prototipo-lista">
+            <li>Identificación visual clara para cada animal.</li>
+            <li>Chip localizador integrado en el arete.</li>
+            <li>Código QR vinculado al historial digital del ganado.</li>
+            <li>Diseño resistente y pensado para uso agropecuario.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="ingresos" class="seccion-verde">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <h2>Modelo de generación de ingresos</h2>
+        <p>La propuesta combina venta de dispositivos, suscripción digital y servicios de soporte.</p>
+      </div>
 
       <div class="ingresos-layout">
         <div class="ingreso-card grande">
           <span class="etiqueta">Canales</span>
           <h3>Puntos de venta</h3>
-
           <p>
             AgroTag podrá obtenerse mediante redes sociales, contacto directo por WhatsApp,
             correo electrónico y puntos de venta en San Carlos, Guanacaste y Pérez Zeledón.
@@ -1150,7 +1710,6 @@
         <div class="ingreso-card">
           <div class="card-icono">💳</div>
           <h3>Ingresos</h3>
-
           <p>
             Los ingresos se generarán mediante la venta de aretes inteligentes,
             suscripciones de la aplicación móvil y servicios adicionales como instalación asistida
@@ -1161,17 +1720,20 @@
     </div>
   </section>
 
-  <section id="social" class="seccion-visual social-section">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="social" class="seccion-verde">
     <div class="contenedor">
-      <h2>Responsabilidad social</h2>
+      <div class="encabezado-seccion">
+        <h2>Responsabilidad social</h2>
+        <p>Tecnología accesible para una ganadería más organizada y con mejores decisiones.</p>
+      </div>
 
-      <div class="bloque-visual bloque-social">
+      <div class="bloque-visual">
         <div class="bloque-numero">✓</div>
-
         <div class="bloque-contenido">
           <span class="etiqueta">Impacto positivo</span>
           <h3>Tecnología para una ganadería más organizada</h3>
-
           <p>
             VELKA busca modernizar el sector agropecuario mediante AgroTag y tecnología accesible,
             ayudando a reducir pérdidas, mejorar el bienestar animal y optimizar la toma de decisiones
@@ -1182,65 +1744,64 @@
     </div>
   </section>
 
-  <section id="equipo" class="equipo">
+  <div class="separador-seccion" aria-hidden="true"></div>
+
+  <section id="equipo" class="seccion-clara">
     <div class="contenedor">
-      <h2>Emprendedores</h2>
-      <p>Equipo creador de VELKA y del producto AgroTag.</p>
+      <div class="encabezado-seccion">
+        <h2>Emprendedores</h2>
+      </div>
+      <p class="equipo-intro">Equipo creador de VELKA y del producto AgroTag.</p>
 
       <div class="carrusel">
-        <button class="carrusel-btn" onclick="moverCarrusel(-1)">&#10094;</button>
+        <button class="carrusel-btn" type="button" onclick="moverCarrusel(-1)" aria-label="Ver integrantes anteriores">&#10094;</button>
 
         <div class="carrusel-contenedor">
           <div class="integrante activo">
             <div class="foto">
-              <img src="Nossara.jpeg" alt="Brittany Nossara Rodríguez Rojas" class="foto-img">
+              <img src="Nossara.jpeg" alt="Brittany Nossara Rodríguez Rojas" class="foto-img" onerror="this.style.display='none';" />
             </div>
-
             <h3>Brittany Nossara Rodríguez Rojas</h3>
             <p>Gerente General</p>
           </div>
 
           <div class="integrante activo">
             <div class="foto">
-              <img src="Sianny.jpeg" alt="Siany Lisset Sánchez Rojas" class="foto-img">
+              <img src="Sianny.jpeg" alt="Siany Lisset Sánchez Rojas" class="foto-img" onerror="this.style.display='none';" />
             </div>
-
             <h3>Siany Lisset Sánchez Rojas</h3>
             <p>Gerente de Recursos Humanos</p>
           </div>
 
           <div class="integrante activo">
             <div class="foto">
-              <img src="Sebastian.jpeg" alt="Sebastián Martínez Arguedas" class="foto-img">
+              <img src="Sebastian.jpeg" alt="Sebastián Martínez Arguedas" class="foto-img" onerror="this.style.display='none';" />
             </div>
-
             <h3>Sebastián Martínez Arguedas</h3>
             <p>Gerente de Marketing</p>
           </div>
 
           <div class="integrante">
             <div class="foto">
-              <img src="Marta.jpeg" alt="Marta Elena Cubero Gutiérrez" class="foto-img">
+              <img src="Marta.jpeg" alt="Marta Elena Cubero Gutiérrez" class="foto-img" onerror="this.style.display='none';" />
             </div>
-
             <h3>Marta Elena Cubero Gutiérrez</h3>
             <p>Gerente de Logística</p>
           </div>
 
           <div class="integrante">
             <div class="foto">
-              <img src="Jakob.jpeg" alt="Jakob Sevilla" class="foto-img">
+              <img src="Jakob.jpeg" alt="Jakob Sevilla" class="foto-img" onerror="this.style.display='none';" />
             </div>
-
             <h3>Jakob Sevilla</h3>
             <p>Gerente de Innovación Tecnológica</p>
           </div>
         </div>
 
-        <button class="carrusel-btn" onclick="moverCarrusel(1)">&#10095;</button>
+        <button class="carrusel-btn" type="button" onclick="moverCarrusel(1)" aria-label="Ver integrantes siguientes">&#10095;</button>
       </div>
 
-      <div class="indicadores">
+      <div class="indicadores" aria-label="Indicadores del carrusel">
         <span class="punto activo" onclick="mostrarGrupo(0)"></span>
         <span class="punto" onclick="mostrarGrupo(1)"></span>
         <span class="punto" onclick="mostrarGrupo(2)"></span>
@@ -1250,33 +1811,67 @@
     </div>
   </section>
 
+  <div class="separador-seccion" aria-hidden="true"></div>
+
   <footer>
-    <p><strong>Universidad de Costa Rica</strong></p>
-    <p><strong></strong> Sede Occidente</p>
-    <p><strong>Profesor:</strong> Keren Sánchez Chaves</p>
-    <p><strong>Correo de la persona coordinadora:</strong> agrotagvekta@gmail.com</p>
-    <p>© 2025 VELKA. Todos los derechos reservados.</p>
+    <div class="footer-contenido">
+      <p><strong>Universidad de Costa Rica</strong> | Sede Occidente</p>
+      <p><strong>Profesor:</strong> Keren Sánchez Chaves</p>
+      <p><strong>Correo de la persona coordinadora:</strong> agrotagvekta@gmail.com</p>
+
+      <div class="redes-sociales" aria-label="Redes sociales de VELKA">
+        <a href="https://www.instagram.com/velkacr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de VELKA">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+          </svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61590242797487" target="_blank" rel="noopener noreferrer" aria-label="Facebook de VELKA">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+            <path d="M13.4 20v-6.7h2.2l.4-2.6h-2.6V9.1c0-.8.2-1.3 1.3-1.3H16V5.5c-.7-.1-1.4-.2-2.1-.2-2.1 0-3.5 1.3-3.5 3.6v1.8H8.1v2.6h2.3V20h3z" fill="currentColor" />
+          </svg>
+          <span>Facebook</span>
+        </a>
+        <a href="https://www.youtube.com/@VELKAcr" target="_blank" rel="noopener noreferrer" aria-label="YouTube de VELKA">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="currentColor" stroke-width="2" />
+            <path d="M10 9l5 3-5 3V9z" fill="currentColor" />
+          </svg>
+          <span>YouTube</span>
+        </a>
+      </div>
+
+      <p>© 2026 VELKA UCR. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
   <script>
     let indiceActual = 0;
+    const integrantes = document.querySelectorAll(".integrante");
+    const puntos = document.querySelectorAll(".punto");
 
-    const integrantes = document.querySelectorAll('.integrante');
-    const puntos = document.querySelectorAll('.punto');
-    const cantidadVisible = 3;
+    function cantidadVisible() {
+      return window.innerWidth <= 768 ? 1 : 3;
+    }
 
     function mostrarGrupo(indice) {
-      integrantes.forEach(integrante => integrante.classList.remove('activo'));
-      puntos.forEach(punto => punto.classList.remove('activo'));
+      integrantes.forEach(integrante => integrante.classList.remove("activo"));
+      puntos.forEach(punto => punto.classList.remove("activo"));
 
       indiceActual = indice;
+      const visibles = cantidadVisible();
 
-      for (let i = 0; i < cantidadVisible; i++) {
+      for (let i = 0; i < visibles; i++) {
         const posicion = (indiceActual + i) % integrantes.length;
-        integrantes[posicion].classList.add('activo');
+        integrantes[posicion].classList.add("activo");
       }
 
-      puntos[indiceActual].classList.add('activo');
+      if (puntos[indiceActual]) {
+        puntos[indiceActual].classList.add("activo");
+      }
     }
 
     function moverCarrusel(direccion) {
@@ -1292,45 +1887,46 @@
 
       mostrarGrupo(nuevoIndice);
     }
-  </script>
 
+    function alternarMenu() {
+      const navLinks = document.getElementById("navLinks");
+      const botonMenu = document.getElementById("botonMenu");
+      const menuAbierto = navLinks.classList.toggle("abierto");
+
+      botonMenu.setAttribute("aria-expanded", menuAbierto ? "true" : "false");
+      botonMenu.textContent = menuAbierto ? "✕ Cerrar" : "☰ Menú";
+    }
+
+    function cerrarMenu() {
+      const navLinks = document.getElementById("navLinks");
+      const botonMenu = document.getElementById("botonMenu");
+
+      navLinks.classList.remove("abierto");
+      botonMenu.setAttribute("aria-expanded", "false");
+      botonMenu.textContent = "☰ Menú";
+    }
+
+    document.addEventListener("click", function(evento) {
+      const nav = document.querySelector(".nav-principal");
+      const navLinks = document.getElementById("navLinks");
+
+      if (navLinks.classList.contains("abierto") && !nav.contains(evento.target)) {
+        cerrarMenu();
+      }
+    });
+
+    document.addEventListener("keydown", function(evento) {
+      if (evento.key === "Escape") {
+        cerrarMenu();
+      }
+    });
+
+    document.querySelectorAll("#navLinks a").forEach(enlace => {
+      enlace.addEventListener("click", cerrarMenu);
+    });
+
+    window.addEventListener("resize", () => mostrarGrupo(indiceActual));
+    mostrarGrupo(0);
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
